@@ -5,7 +5,7 @@
 	</description>
 
 <!-- Main -->
-	<target name="main" depends="clean, init, compile, package">
+	<target name="main" depends="clean, init, compile, doc, package">
 		<description>Main target</description>
 	</target>
 
@@ -33,11 +33,20 @@
 		<mkdir dir="${build.dir}"/>
 		<mkdir dir="${doc.dir}"/>
 	</target>
+			
+<target name="doc" depends="init" description="generate documentation">
+	<delete dir="${doc.dir}" />
+	<mkdir dir="${doc.dir}" />
+	<javadoc destdir="${doc.dir}">
+	    <fileset dir="${source.dir}/main" />
+	</javadoc>
+</target>
 
-<!-- Generate javadocs for current project into $ {doc.dir} -->
+<!-- Generate javadocs for current project into $ {doc.dir}
 	<target name="doc" depends="init" description="generate documentation">
 		<javadoc sourcepath="${source.dir}" destdir="${doc.dir}"/>
 	</target>
+-->
 	
 <!-- Delete the build & doc directories and Emacs backup (*~) files -->
 	<target name="clean" description="tidy up the workspace">
